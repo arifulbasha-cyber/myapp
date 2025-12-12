@@ -1,47 +1,76 @@
+
 import 'package:hive/hive.dart';
-import 'package:myapp/models/reading.dart';
-import 'package:myapp/models/tariff.dart';
 
 part 'bill.g.dart';
 
 @HiveType(typeId: 0)
 class Bill extends HiveObject {
   @HiveField(0)
-  String id;
+  final String id;
 
   @HiveField(1)
-  DateTime month;
+  final DateTime month;
 
   @HiveField(2)
-  double totalBill;
+  final double totalBillAmount;
 
   @HiveField(3)
-  bool includeLateFee;
+  final bool includeLateFee;
 
   @HiveField(4)
-  bool includeBkashFee;
+  final double lateFee;
 
   @HiveField(5)
-  double lateFee;
+  final bool includeBkashFee;
 
   @HiveField(6)
-  List<Reading> readings;
+  final double bkashFee;
 
   @HiveField(7)
-  Tariff tariff;
-  
+  final List<String> tenantIds;
+
   @HiveField(8)
-  DateTime createdAt;
+  final DateTime createdAt;
+
+  @HiveField(9)
+  final DateTime updatedAt;
 
   Bill({
     required this.id,
     required this.month,
-    required this.totalBill,
-    required this.includeLateFee,
-    required this.includeBkashFee,
-    required this.lateFee,
-    required this.readings,
-    required this.tariff,
+    required this.totalBillAmount,
+    this.includeLateFee = false,
+    this.lateFee = 0.0,
+    this.includeBkashFee = false,
+    this.bkashFee = 0.0,
+    required this.tenantIds,
     required this.createdAt,
+    required this.updatedAt,
   });
+
+  Bill copyWith({
+    String? id,
+    DateTime? month,
+    double? totalBillAmount,
+    bool? includeLateFee,
+    double? lateFee,
+    bool? includeBkashFee,
+    double? bkashFee,
+    List<String>? tenantIds,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return Bill(
+      id: id ?? this.id,
+      month: month ?? this.month,
+      totalBillAmount: totalBillAmount ?? this.totalBillAmount,
+      includeLateFee: includeLateFee ?? this.includeLateFee,
+      lateFee: lateFee ?? this.lateFee,
+      includeBkashFee: includeBkashFee ?? this.includeBkashFee,
+      bkashFee: bkashFee ?? this.bkashFee,
+      tenantIds: tenantIds ?? this.tenantIds,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }

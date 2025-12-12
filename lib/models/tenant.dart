@@ -1,17 +1,26 @@
+
 import 'package:hive/hive.dart';
 
 part 'tenant.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class Tenant extends HiveObject {
   @HiveField(0)
-  String id;
+  final String id;
 
   @HiveField(1)
-  String name;
+  final String name;
 
   @HiveField(2)
-  String? phoneNumber;
+  final String phoneNumber;
 
-  Tenant({required this.id, required this.name, this.phoneNumber});
+  @HiveField(3)
+  final String notes;
+
+  Tenant({
+    required this.id,
+    required this.name,
+    this.phoneNumber = '',
+    this.notes = '',
+  });
 }

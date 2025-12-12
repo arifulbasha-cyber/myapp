@@ -1,21 +1,21 @@
+
 import 'package:hive/hive.dart';
-import 'package:myapp/models/tenant.dart';
 
 part 'reading.g.dart';
 
-@HiveType(typeId: 4)
+@HiveType(typeId: 1)
 class Reading extends HiveObject {
   @HiveField(0)
-  Tenant tenant;
+  final String tenantId;
 
   @HiveField(1)
-  double previous;
+  final double previous;
 
   @HiveField(2)
-  double current;
+  final double current;
 
   Reading({
-    required this.tenant,
+    required this.tenantId,
     required this.previous,
     required this.current,
   });
